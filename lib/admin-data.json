@@ -1,0 +1,258 @@
+{
+  "usuarios": [
+    {
+      "id": "usr-1",
+      "nombre": "Juan Pérez",
+      "email": "juan.perez@example.com",
+      "telefono": "+52 241 123 4567",
+      "fechaRegistro": "2024-01-15",
+      "tipoUsuario": "regular",
+      "rutasRegistradas": 3,
+      "activo": true
+    },
+    {
+      "id": "usr-2",
+      "nombre": "María González",
+      "email": "maria.gonzalez@example.com",
+      "telefono": "+52 241 234 5678",
+      "fechaRegistro": "2024-01-20",
+      "tipoUsuario": "regular",
+      "rutasRegistradas": 5,
+      "activo": true
+    },
+    {
+      "id": "usr-3",
+      "nombre": "Carlos Ramírez",
+      "email": "carlos.ramirez@example.com",
+      "telefono": "+52 241 345 6789",
+      "fechaRegistro": "2024-02-01",
+      "tipoUsuario": "regular",
+      "rutasRegistradas": 2,
+      "activo": true
+    },
+    {
+      "id": "usr-4",
+      "nombre": "Ana Martínez",
+      "email": "ana.martinez@example.com",
+      "telefono": "+52 241 456 7890",
+      "fechaRegistro": "2024-02-10",
+      "tipoUsuario": "regular",
+      "rutasRegistradas": 4,
+      "activo": false
+    },
+    {
+      "id": "usr-5",
+      "nombre": "Luis Hernández",
+      "email": "luis.hernandez@example.com",
+      "telefono": "+52 241 567 8901",
+      "fechaRegistro": "2024-02-15",
+      "tipoUsuario": "regular",
+      "rutasRegistradas": 1,
+      "activo": true
+    }
+  ],
+  "rutas": [
+    {
+      "id": "rt-1",
+      "nombre": "Ruta Centro - Xicohténcatl",
+      "origen": "Centro de Huamantla",
+      "destino": "Zona Industrial Xicohténcatl",
+      "municipio": "Huamantla",
+      "empresa": "Transportes Huamantla",
+      "costoMinimo": 8,
+      "costoMaximo": 10,
+      "moneda": "MXN",
+      "duracion": "25 - 30 min",
+      "frecuencia": "Cada 12 min",
+      "paradas": [
+        "Centro de Huamantla",
+        "Universidad Tecnológica de Tlaxcala",
+        "Libramiento Oriente",
+        "Barrio de San Sebastián",
+        "Zona Industrial Xicohténcatl"
+      ],
+      "coordenadas": [
+        [-97.931, 19.315],
+        [-97.925, 19.317],
+        [-97.920, 19.318],
+        [-97.915, 19.320],
+        [-97.910, 19.323]
+      ],
+      "horarios": [
+        {
+          "dia": "Lunes - Viernes",
+          "salidas": ["06:00", "06:30", "07:00", "07:30", "08:00", "09:00", "12:00", "17:00", "18:00", "20:00"]
+        },
+        {
+          "dia": "Sábado",
+          "salidas": ["07:00", "08:00", "10:00", "12:00", "14:00", "18:00"]
+        },
+        {
+          "dia": "Domingo",
+          "salidas": ["08:00", "10:00", "12:00", "16:00", "19:00"]
+        }
+      ],
+      "usuariosRegistrados": 45,
+      "fechaCreacion": "2023-12-01",
+      "activa": true,
+      "notas": "Tarifa preferencial para estudiantes disponible al presentar credencial."
+    },
+    {
+      "id": "rt-2",
+      "nombre": "Ruta Huamantla - San José Xicohténcatl",
+      "origen": "UTT",
+      "destino": "Colonia Centro",
+      "municipio": "Huamantla",
+      "empresa": "Rutas del Altiplano",
+      "costoMinimo": 9,
+      "costoMaximo": 12,
+      "moneda": "MXN",
+      "duracion": "20 - 25 min",
+      "frecuencia": "Cada 15 min",
+      "paradas": [
+        "UTT",
+        "Libramiento",
+        "Av. Hidalgo",
+        "Colonia Centro"
+      ],
+      "coordenadas": [
+        [-97.928, 19.312],
+        [-97.922, 19.314],
+        [-97.918, 19.316],
+        [-97.914, 19.318]
+      ],
+      "horarios": [
+        {
+          "dia": "Lunes - Viernes",
+          "salidas": ["06:15", "06:45", "07:15", "08:15", "12:30", "15:00", "18:30", "21:00"]
+        },
+        {
+          "dia": "Sábado",
+          "salidas": ["07:30", "09:00", "11:00", "13:30", "17:30"]
+        }
+      ],
+      "usuariosRegistrados": 32,
+      "fechaCreacion": "2023-11-15",
+      "activa": true,
+      "notas": ""
+    },
+    {
+      "id": "rt-3",
+      "nombre": "Ruta Huamantla - Ixtenco",
+      "origen": "Mercado Municipal",
+      "destino": "Rotonda Oriente",
+      "municipio": "Huamantla",
+      "empresa": "Mobility Tlax",
+      "costoMinimo": 15,
+      "costoMaximo": 18,
+      "moneda": "MXN",
+      "duracion": "35 - 40 min",
+      "frecuencia": "Cada 20 min",
+      "paradas": [
+        "Mercado Municipal",
+        "Parque Juárez",
+        "Capilla San Miguel",
+        "Rotonda Oriente"
+      ],
+      "coordenadas": [
+        [-97.930, 19.310],
+        [-97.925, 19.312],
+        [-97.920, 19.315],
+        [-97.915, 19.318]
+      ],
+      "horarios": [
+        {
+          "dia": "Lunes - Domingo",
+          "salidas": ["07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00"]
+        }
+      ],
+      "usuariosRegistrados": 28,
+      "fechaCreacion": "2023-10-20",
+      "activa": true,
+      "notas": "Ruta interurbana con servicio todos los días."
+    },
+    {
+      "id": "rt-4",
+      "nombre": "Ruta Huamantla - Zitlaltepec",
+      "origen": "Terminal Central",
+      "destino": "Zitlaltepec Centro",
+      "municipio": "Huamantla",
+      "empresa": "Autotransportes Xico",
+      "costoMinimo": 20,
+      "costoMaximo": 25,
+      "moneda": "MXN",
+      "duracion": "45 - 50 min",
+      "frecuencia": "Cada 30 min",
+      "paradas": [
+        "Terminal Central",
+        "Carretera Apizaco",
+        "Entrada Zitlaltepec",
+        "Zitlaltepec Centro"
+      ],
+      "coordenadas": [
+        [-97.932, 19.308],
+        [-97.920, 19.305],
+        [-97.910, 19.300],
+        [-97.900, 19.295]
+      ],
+      "horarios": [
+        {
+          "dia": "Lunes - Viernes",
+          "salidas": ["06:00", "07:00", "08:00", "09:00", "10:00", "12:00", "14:00", "16:00", "18:00", "20:00"]
+        },
+        {
+          "dia": "Sábado - Domingo",
+          "salidas": ["08:00", "10:00", "12:00", "14:00", "16:00", "18:00"]
+        }
+      ],
+      "usuariosRegistrados": 18,
+      "fechaCreacion": "2023-09-10",
+      "activa": true,
+      "notas": ""
+    },
+    {
+      "id": "rt-5",
+      "nombre": "Ruta Periférico - Centro",
+      "origen": "Periférico Oriente",
+      "destino": "Centro Histórico",
+      "municipio": "Huamantla",
+      "empresa": "TransHuamantla Express",
+      "costoMinimo": 7,
+      "costoMaximo": 9,
+      "moneda": "MXN",
+      "duracion": "15 - 20 min",
+      "frecuencia": "Cada 10 min",
+      "paradas": [
+        "Periférico Oriente",
+        "Bodega Aurrera",
+        "Av. Juárez",
+        "Centro Histórico"
+      ],
+      "coordenadas": [
+        [-97.935, 19.320],
+        [-97.930, 19.318],
+        [-97.925, 19.316],
+        [-97.920, 19.314]
+      ],
+      "horarios": [
+        {
+          "dia": "Lunes - Viernes",
+          "salidas": ["05:30", "06:00", "06:30", "07:00", "07:30", "08:00", "08:30", "09:00", "12:00", "13:00", "14:00", "17:00", "18:00", "19:00", "20:00", "21:00"]
+        },
+        {
+          "dia": "Sábado",
+          "salidas": ["06:00", "07:00", "08:00", "09:00", "10:00", "12:00", "14:00", "16:00", "18:00", "20:00"]
+        },
+        {
+          "dia": "Domingo",
+          "salidas": ["07:00", "09:00", "11:00", "13:00", "15:00", "17:00", "19:00"]
+        }
+      ],
+      "usuariosRegistrados": 67,
+      "fechaCreacion": "2023-08-05",
+      "activa": true,
+      "notas": "Ruta más popular con mayor frecuencia de servicio."
+    }
+  ]
+}
+

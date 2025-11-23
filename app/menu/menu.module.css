@@ -1,0 +1,297 @@
+/* @frontend/ Variables CSS del proyecto MR */
+:root {
+  --primary: #0062ff;
+  --background: #02001f27;
+  --navbar-height: 4rem;
+}
+
+/* @frontend/ Estilos base del menú */
+.navbar {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 50;
+  background: var(--background);
+  border-bottom: 1px solid rgba(0, 110, 255, 0.247);
+  -webkit-backdrop-filter: saturate(130%) blur(4px);
+  backdrop-filter: saturate(130%) blur(4px);
+  opacity: 0.9;
+}
+
+/* @frontend/ Estados de visibilidad del menú */
+.shownBar { 
+  transform: translateY(0); 
+  transition: transform 150ms ease; 
+}
+
+.hiddenBar { 
+  transform: translateY(-100%); 
+  transition: transform 150ms ease; 
+}
+
+/* @frontend/ Contenedor interno */
+.inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+}
+
+/* @frontend/ Logo y nombre */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 1.4rem;
+}
+
+.logo {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 5px;
+}
+
+.brandLink {
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.4rem;
+  transition: color 0.2s ease;
+}
+
+.brandLink:hover {
+  color: blue;
+}
+
+/* @frontend/ Navegación principal - Desktop */
+.links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  list-style: none;
+}
+
+.link {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  position: relative;
+  padding: 0.2rem 0;
+}
+
+.link::before {
+  content: '';
+  background: var(--primary);
+  display: block;
+  position: absolute;
+  bottom: -0.125rem;
+  left: 0;
+  width: 0;
+  height: 0.125rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.link:hover {
+  color: rgb(255, 193, 7);;
+}
+
+.link:hover::before {
+  width: 100%;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logoutButton {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.logoutButton:hover {
+  background: rgba(80, 96, 244, 0.1);
+}
+
+.logoutIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  transition: filter 0.2s ease;
+}
+
+.logoutButton:hover .logoutIcon {
+  filter: invert(0%) sepia(150%) saturate(1000%) brightness(100%) contrast(100%);
+}
+
+/* @frontend/ Botón hamburguesa para móvil */
+.mobileToggle {
+  display: none;
+  width: 2.25rem;
+  height: 2.25rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  border: none;
+  background: rgba(121, 190, 255, 0.247);
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 1.2rem;
+}
+
+.mobileToggle:hover {
+  background: rgba(255, 255, 255, 0.068);
+  transform: scale(1.05);
+  color: rgb(255, 193, 7);
+}
+
+/* @frontend/ Overlay del menú móvil */
+.sidebarOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 9, 32, 0.870);
+  display: none;
+  transition: opacity 0.3s ease-in-out;
+  opacity: 0;
+  z-index: 40;
+  margin-right: 8.22rem;
+}
+
+.sidebarOverlayOpen {
+  display: block;
+  opacity: 1;
+}
+
+/* @frontend/ Sidebar móvil */
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 280px;
+  padding: 1rem;
+  background: var(--background);
+  border: none;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+  z-index: 100;
+  opacity: 0.95;
+}
+
+.sidebarOpen {
+  transform: translateX(0);
+}
+
+/* @frontend/ Botón de cerrar sidebar */
+/* .closeSidebarButton {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 2.25rem;
+  height: 2.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  border: 1px solid rgb(244, 189, 80);
+  background: rgba(25, 25, 25, 0.8);
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 1.2rem;
+}
+
+.closeSidebarButton:hover {
+  background: rgba(244, 189, 80, 0.1);
+  transform: scale(1.05);
+} */
+
+/* @frontend/ Enlaces del sidebar */
+.sidebarLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 3.5rem;
+  width: 100%;
+}
+
+.sidebarLinks .link {
+  font-size: 1.2rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgb(0, 130, 220);
+}
+
+.sidebarLinks .link:hover {
+  background: rgba(0, 128, 220, 0.192);
+  padding-left: 0.5rem;
+  border-radius: 0.20rem;
+  color: rgb(255, 193, 7);
+  box-shadow: 0 0 8px rgba(255, 193, 7, 0);
+  border-left: 2px solid rgba(255, 193, 7, 0.5);
+}
+
+/* @frontend/ Botón de acción en sidebar */
+.iconButton {
+  background: rgba(0, 130, 220, 0.1);
+  border: 1px solid rgb(0, 130, 220);
+  color: white;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-top: 1rem;
+}
+
+.iconButton:hover {
+  background: rgba(255, 0, 0, 0.2);
+  border: 1px solid rgb(220, 0, 0);
+  transform: scale(1.02);
+  color: rgb(255, 193, 7);
+}
+
+/* @frontend/ Media queries para responsive */
+@media (max-width: 768px) {
+  .links { 
+    display: none; 
+  }
+  
+  .actions { 
+    display: none; 
+  }
+  
+  .mobileToggle { 
+    display: flex; 
+  }
+
+  body.mobileMenuOpen { 
+    overflow: hidden; 
+  }
+}
+
+@media (min-width: 769px) {
+  .mobileToggle {
+    display: none;
+  }
+  
+  .sidebarOverlay {
+    display: none !important;
+  }
+  
+  .sidebar {
+    display: none !important;
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "name": "frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build --turbopack",
+    "start": "next start",
+    "lint": "eslint",
+    "bubblewrap:init": "bubblewrap init",
+    "bubblewrap:update": "bubblewrap update",
+    "bubblewrap:build": "bubblewrap build",
+    "android:build": "cd android && ./gradlew assembleRelease",
+    "android:sign": "cd android && jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore android.keystore app/build/outputs/apk/release/app-release-unsigned.apk mobzi"
+  },
+  "dependencies": {
+    "@zip.js/zip.js": "^2.8.10",
+    "jspdf": "^3.0.3",
+    "mapbox-gl": "^3.15.0",
+    "xlsx": "^0.18.5",
+    "next": "15.5.3",
+    "react": "19.1.0",
+    "react-dom": "19.1.0"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4.1.13",
+    "@types/mapbox-gl": "^3.4.1",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "autoprefixer": "^10.4.21",
+    "baseline-browser-mapping": "^2.8.28",
+    "@netlify/plugin-nextjs": "^4.39.0",
+    "eslint": "^9",
+    "eslint-config-next": "15.5.3",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.13",
+    "typescript": "^5"
+  }
+}

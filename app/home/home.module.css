@@ -1,0 +1,755 @@
+.page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1e293b, #334155);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.searchBarContainer {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.searchBar {
+  position: relative;
+  width: 100%;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 0.875rem 2.75rem 0.875rem 1rem;
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
+  border-radius: 0.5rem;
+  color: var(--text-primary);
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+  box-sizing: border-box;
+}
+
+.searchInput::placeholder {
+  color: var(--text-secondary);
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: #0062ff;
+  box-shadow: 0 0 0 3px rgba(0, 98, 255, 0.1), 0 0 0 1px rgba(255, 193, 7, 0.2);
+}
+
+.searchInput {
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  color: #93c5fd;
+}
+
+.searchIcon {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--text-secondary);
+}
+
+.searchIcon {
+  color: #93c5fd;
+}
+
+.filters {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
+  border-radius: 0.5rem;
+  color: var(--text-primary);
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+  box-sizing: border-box;
+  padding-right: 2.5rem;
+}
+
+.select option {
+  background: rgba(15, 23, 42, 0.95);
+  color: #93c5fd;
+  padding: 0.5rem;
+}
+
+.select:focus {
+  outline: none;
+  border-color: #0062ff;
+  box-shadow: 0 0 0 3px rgba(0, 98, 255, 0.1), 0 0 0 1px rgba(255, 193, 7, 0.2);
+}
+
+.select {
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  color: #93c5fd;
+}
+
+.mapSection {
+  margin-top: 1rem;
+  display: flex;
+  gap: 1rem;
+  align-items: stretch;
+}
+
+.mapWrap {
+  flex: 1 1 60%;
+  border-radius: 0.5rem;
+  border: 1px solid var(--card-border);
+  overflow: hidden;
+  position: relative;
+  min-height: 420px;
+  height: calc(100vh - 260px);
+}
+
+/* Ocupa todo el ancho cuando no hay panel lateral */
+.mapWrapFull {
+  flex: 1 1 100%;
+}
+
+.mapWrap {
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+}
+
+.map {
+  width: 100%;
+  height: 100%;
+  min-height: 300px;
+}
+
+.mapMarkerLabel {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(15, 23, 42, 0.95);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+.mapActions {
+  position: absolute;
+  left: 0.75rem;
+  top: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.mapActionBtn {
+  width: 2.25rem;
+  height: 2.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  border: 1px solid var(--card-border);
+  background: var(--card-bg);
+  color: var(--text-primary);
+  transition: all 0.2s ease;
+}
+
+.mapActionBtn:hover {
+  background: var(--input-bg);
+  transform: scale(1.05);
+}
+
+.mapActionBtn {
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  color: #93c5fd;
+}
+
+.mapActionBtn:hover {
+  background: rgba(30, 64, 175, 0.2);
+  border-color: rgba(255, 193, 7, 0.4);
+  box-shadow: 0 2px 8px rgba(255, 193, 7, 0.15);
+}
+
+.routeDetailsPanel {
+  flex: 1 1 40%;
+  background: rgba(15, 23, 42, 0.92);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.4);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-height: calc(100vh - 260px);
+  overflow-y: auto;
+}
+
+.routeDetailsHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  position: relative;
+}
+
+.routeDetailsBadge {
+  align-self: flex-start;
+  background: rgba(59, 130, 246, 0.2);
+  color: #bfdbfe;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.routeDetailsHeader h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: white;
+  margin: 0;
+}
+
+
+/* Spinner simple para panel de carga */
+/* .spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem 0;
+}
+.spinnerIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: 4px solid rgba(255,255,255,0.12);
+  border-top-color: rgba(59,130,246,0.9);
+  animation: spin 1s linear infinite;
+  margin-bottom: 0.6rem;
+}
+.spinnerText {
+  color: #bfdbfe;
+  font-weight: 600;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+} */
+
+
+.routeEndpoints {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.routeCostSection {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  background: rgba(59, 130, 246, 0.08);
+  border: 1px solid rgba(59, 130, 246, 0.18);
+}
+
+.routeCostLabel {
+  font-size: 0.75rem;
+  color: rgba(191, 219, 254, 0.8);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.routeCostValue {
+  margin-top: 0.25rem;
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: #facc15;
+}
+
+.routeMetaInfo {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.routeMetaLabel {
+  font-size: 0.75rem;
+  color: rgba(191, 219, 254, 0.8);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  display: block;
+}
+
+.routeStopsSection h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 0.5rem;
+}
+
+.routeStopsList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.routeStopsList li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid rgba(59, 130, 246, 0.18);
+  border-radius: 0.5rem;
+  background: rgba(15, 23, 42, 0.75);
+}
+
+.stopIndex {
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 999px;
+  background: rgba(59, 130, 246, 0.25);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #bfdbfe;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.stopName {
+  color: #e2e8f0;
+  font-weight: 500;
+}
+
+.routeNotes h4 {
+  margin: 0 0 0.35rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: white;
+}
+
+.routeNotes p {
+  margin: 0;
+  color: rgba(191, 219, 254, 0.85);
+  font-size: 0.9rem;
+}
+
+/* Controles del panel (minimizar y cerrar) */
+.panelControls {
+  position: absolute;
+  top: 0.25rem;
+  right: 0.25rem;
+  display: flex;
+  gap: 0.35rem;
+}
+
+.panelControlBtn {
+  width: 28px;
+  height: 28px;
+  border-radius: 0.4rem;
+  border: 1px solid rgba(59, 130, 246, 0.35);
+  background: rgba(15, 23, 42, 0.95);
+  color: #ef4444;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.panelControlBtn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0, 98, 255, 0.15);
+}
+
+.panelControlClose {
+  color: #ef4444;
+  border-color: rgba(239, 68, 68, 0.5);
+}
+
+.panelControlClose:hover {
+  background: rgba(239, 68, 68, 0.15);
+}
+
+/* Estilos para inputs/selects deshabilitados: visualmente atenuados y cursor no permitido */
+.searchInput:disabled,
+.select:disabled {
+  opacity: 0.62;
+  cursor: not-allowed;
+  filter: grayscale(6%);
+  box-shadow: none;
+}
+
+/* Parpadeo más intenso para el botón de cerrar (X) cuando hay panel abierto */
+@keyframes pulseRedStrong {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(239,68,68,0);
+    background: rgba(15,23,42,0.95);
+  }
+  30% {
+    transform: scale(1.08);
+    box-shadow: 0 0 18px 8px rgba(239,68,68,0.26);
+    background: rgba(239,68,68,0.06);
+  }
+  60% {
+    transform: scale(1.03);
+    box-shadow: 0 0 10px 4px rgba(239,68,68,0.14);
+    background: rgba(239,68,68,0.04);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(239,68,68,0);
+    background: rgba(15,23,42,0.95);
+  }
+}
+
+.panelControlClose {
+  animation: pulseRedStrong 1.25s ease-in-out infinite;
+}
+
+.panelControlMin {
+  color: #f59e0b;
+  border-color: rgba(245, 158, 11, 0.5);
+}
+
+.panelControlMin:hover {
+  background: rgba(245, 158, 11, 0.15);
+}
+
+.minimized .routeCostSection,
+.minimized .routeMetaInfo,
+.minimized .routeStopsSection,
+.minimized .routeNotes {
+  display: none;
+}
+.minimized .routeListByEmpresa {
+  display: none;
+}
+
+.minimized {
+  padding-bottom: 0.75rem;
+}
+
+/* ==== Panel de empresa con múltiples rutas ==== */
+.routeListByEmpresa h3 {
+  font-size: 1.1rem;
+  color: white;
+  margin-bottom: 0.75rem;
+}
+
+.routeCardsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.routeCardItem {
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.routeCardItem:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.25);
+}
+
+.clickableCard {
+  cursor: pointer;
+}
+
+.clickableCard:hover {
+  border-color: rgba(59, 130, 246, 0.4);
+  background: rgba(15, 23, 42, 0.9);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.routeName {
+  color: #facc15;
+  font-weight: 600;
+  font-size: 1.05rem;
+  margin-bottom: 0.25rem;
+}
+
+.routeCardRow {
+  display: flex;
+  justify-content: space-between;
+  color: #e2e8f0;
+  font-size: 0.9rem;
+}
+
+.routeCardRow span {
+  color: rgba(191, 219, 254, 0.8);
+  font-size: 0.8rem;
+}
+
+.noRoutes {
+  color: rgba(191, 219, 254, 0.75);
+  font-style: italic;
+}
+
+/* =============================== */
+/* ESTILOS GLOBALES PARA POPUPS DE MAPBOX (usar :global por CSS Modules) */
+/* =============================== */
+
+:global(.mapboxgl-popup) {
+  z-index: 9999;
+}
+
+:global(.mapboxgl-popup-content) {
+  background-color: #414141d5 !important; /* gris oscuro */
+  color: #ffffff !important; /* azul brillante para el texto */
+  font-weight: 500;
+  font-size: 14px;
+  border-radius: 5px;
+  border: 1px solid #ffffff65 !important; /* borde azul */
+  text-align: center;
+  padding: 8px 12px;
+}
+
+/* Si Mapbox genera un elemento interno adicional, también lo forzamos */
+:global(.mapboxgl-popup-content *) {
+  color: #ff0000 !important;
+}
+
+/* Ajusta la punta/triángulo del popup */
+:global(.mapboxgl-popup-tip) {
+  border-top-color: #ffffff65 !important;
+}
+
+@media (max-width: 900px) {
+  .filters {
+    grid-template-columns: 1fr;
+  }
+  .mapSection {
+    flex-direction: column;
+  }
+  .mapWrap {
+    height: 360px;
+    min-height: 320px;
+    flex: none;
+  }
+  .map {
+    min-height: 320px;
+  }
+  .routeDetailsPanel {
+    max-height: none;
+    width: 100%;
+    flex: none;
+  }
+}
+
+/* Botones de acción en el mapa */
+.routeActionButtons {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.panelRestoreChip {
+  position: absolute;
+  top: 1rem;
+  right: 3rem;
+  z-index: 12;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: rgba(15, 23, 42, 0.95);
+  border: 1px solid rgba(59, 130, 246, 0.35);
+  border-radius: 999px;
+  color: #93c5fd;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
+}
+
+.panelRestoreChipText {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.panelRestoreChipBtn {
+  border: 1px solid rgba(59, 130, 246, 0.5);
+  background: rgba(30, 58, 138, 0.6);
+  color: #dbeafe;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.panelRestoreChipBtn:hover {
+  background: rgba(30, 64, 175, 0.8);
+  border-color: rgba(59, 130, 246, 0.7);
+}
+
+.actionButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: rgba(15, 23, 42, 0.95);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  border-radius: 0.5rem;
+  color: #93c5fd;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.actionButton:hover:not(:disabled) {
+  background: rgba(30, 58, 138, 0.9);
+  border-color: rgba(59, 130, 246, 0.5);
+  color: #dbeafe;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 98, 255, 0.2);
+}
+
+.actionButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.actionButton svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
+}
+
+.actionButton:first-child svg {
+  color: rgba(255, 193, 7, 0.5);
+  transition: color 0.2s ease;
+}
+
+.actionButton:first-child:hover:not(:disabled) svg {
+  color: rgba(255, 193, 7, 0.8);
+}
+
+/* Estado activo para favoritos (amarillo) */
+.actionButtonActive svg {
+  color: #ffc107 !important;
+  fill: #ffc107 !important;
+}
+
+.actionButtonActive:hover:not(:disabled) svg {
+  color: #ffb300 !important;
+  fill: #ffb300 !important;
+}
+
+/* Estado activo para guardar (azul claro) */
+.actionButtonSaved svg {
+  color: #60a5fa !important;
+  fill: #60a5fa !important;
+}
+
+.actionButtonSaved:hover:not(:disabled) svg {
+  color: #3b82f6 !important;
+  fill: #3b82f6 !important;
+}
+
+.routeEndpointsMini {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  background: rgba(59, 130, 246, 0.08);
+  border: 1px solid rgba(59, 130, 246, 0.18);
+  color: #b1cfff;
+}
+
+.routeCostMini {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.25rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #facc15;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  background: rgba(59, 130, 246, 0.08);
+  border: 1px solid rgba(59, 130, 246, 0.18);
+}
+
+@media (max-width: 600px) {
+  .routeMetaInfo {
+    grid-template-columns: 1fr;
+  }
+  .routeCostSection {
+    grid-template-columns: 1fr;
+  }
+  .mapWrap {
+    height: 300px;
+  }
+  .routeDetailsPanel {
+    padding: 0.85rem;
+  }
+  .routeActionButtons {
+    top: 0.5rem;
+    left: 0.5rem;
+  }
+  .panelRestoreChip {
+    top: 0.6rem;
+    right: 3rem;
+    gap: 0.25rem;
+    padding: 0rem;
+    border-radius: 0.5rem;
+  }
+  .panelRestoreChipText {
+    display: none;
+  }
+  .panelRestoreChipBtn {
+    font-size: 0.75rem;
+    padding: 0.2rem 0.4rem;
+  }
+  .actionButton {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.75rem;
+  }
+  .actionButton span {
+    display: none;
+  }
+}

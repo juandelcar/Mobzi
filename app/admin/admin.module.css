@@ -1,0 +1,1178 @@
+/* @frontend/ Página de Administración */
+
+.page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1e293b, #334155);
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1rem;
+  padding-top: 5rem;
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  min-height: 50vh;
+  color: white;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.spinner {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 9999px;
+  border: 3px solid rgba(59, 130, 246, 0.25);
+  border-top-color: #ffc107;
+  animation: adminSpin 1s linear infinite;
+}
+
+@keyframes adminSpin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Header */
+.header {
+  margin-bottom: 2rem;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: rgba(147, 197, 253, 0.8);
+  font-weight: 400;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid rgba(59, 130, 246, 0.2);
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  scroll-behavior: smooth;
+  white-space: nowrap;
+  align-items: stretch;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 0.25rem;
+  -webkit-mask-image: linear-gradient(to right, transparent 0, rgba(0,0,0,0.85) 24px, rgba(0,0,0,1) calc(100% - 24px), transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0, rgba(0,0,0,0.85) 24px, rgba(0,0,0,1) calc(100% - 24px), transparent 100%);
+}
+
+.tabs::-webkit-scrollbar {
+  height: 0px;
+}
+
+.tabs:hover::-webkit-scrollbar {
+  height: 8px;
+}
+
+.tabs:hover::-webkit-scrollbar-track {
+  background: rgba(59, 130, 246, 0.15);
+}
+
+.tabs:hover::-webkit-scrollbar-thumb {
+  background: rgba(255, 230, 0, 0.7);
+  border-radius: 8px;
+}
+
+.tab {
+  padding: 1rem 1.5rem;
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  color: rgba(147, 197, 253, 0.7);
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: -2px;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  flex: 0 0 auto;
+  display: inline-flex;
+  min-width: max-content;
+  scroll-snap-align: start;
+}
+
+.tab:hover {
+  color: rgba(147, 197, 253, 1);
+  background: rgba(59, 130, 246, 0.1);
+}
+
+.activeTab {
+  color: white;
+  border-bottom-color: #ffe600;
+  background: rgba(59, 130, 246, 0.1);
+}
+
+@media (max-width: 768px) {
+  .tabs {
+    flex-direction: row;
+    gap: 0.5rem;
+    padding-inline: 0.5rem;
+    white-space: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x;
+  }
+  .tab {
+    min-width: max-content;
+    scroll-snap-align: start;
+  }
+}
+
+/* Section */
+.section {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 1rem;
+  padding: 2rem;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.sectionHeader h2 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: white;
+  margin: 0;
+  padding-left: 0.75rem;
+  border-left: 4px solid rgba(255, 193, 7, 0.65);
+}
+
+/* Buttons */
+.primaryButton {
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #0062ff, #0052e0);
+  border: none;
+  border-radius: 0.5rem;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 98, 255, 0.3);
+}
+
+.primaryButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 98, 255, 0.4);
+}
+
+.secondaryButton {
+  padding: 0.75rem 1.5rem;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  border-radius: 0.5rem;
+  color: #93c5fd;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.secondaryButton:hover {
+  background: rgba(59, 130, 246, 0.1);
+  border-color: rgba(59, 130, 246, 0.5);
+}
+
+/* Search Bar */
+.searchBar {
+  margin-bottom: 1.5rem;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 0.5rem;
+  color: #93c5fd;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.searchInput::placeholder {
+  color: rgba(147, 197, 253, 0.5);
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: #0062ff;
+  box-shadow: 0 0 0 3px rgba(0, 98, 255, 0.1);
+}
+
+/* Table */
+.tableContainer {
+  overflow-x: auto;
+  border-radius: 0.5rem;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(15, 23, 42, 0.4);
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.table thead {
+  background: rgba(59, 130, 246, 0.2);
+}
+
+.table th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: white;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.table td {
+  padding: 1rem;
+  color: rgba(147, 197, 253, 0.9);
+  border-top: 1px solid rgba(59, 130, 246, 0.1);
+}
+
+.table tbody tr {
+  transition: background 0.2s ease;
+}
+
+.table tbody tr:hover {
+  background: rgba(59, 130, 246, 0.1);
+}
+
+/* Badges */
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.badgeActive {
+  background: rgba(34, 197, 94, 0.2);
+  color: #4ade80;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.badgeInactive {
+  background: rgba(239, 68, 68, 0.2);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+/* Action Buttons */
+.actionButtons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.editButton,
+.deleteButton,
+.toggleButton {
+  padding: 0.5rem;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.5rem;
+  height: 2.5rem;
+}
+
+.editButton:hover {
+  background: rgba(59, 130, 246, 0.2);
+  border-color: rgba(59, 130, 246, 0.4);
+  transform: scale(1.05);
+}
+
+.deleteButton:hover {
+  background: rgba(239, 68, 68, 0.2);
+  border-color: rgba(239, 68, 68, 0.4);
+  transform: scale(1.05);
+}
+
+.toggleButton:hover {
+  background: rgba(234, 179, 8, 0.2);
+  border-color: rgba(234, 179, 8, 0.4);
+  transform: scale(1.05);
+}
+
+/* Download Section */
+.downloadSection {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.downloadCard {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  transition: all 0.2s ease;
+}
+
+.downloadCard:hover {
+  border-color: rgba(59, 130, 246, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 98, 255, 0.2);
+}
+
+.downloadCard h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 0.5rem;
+}
+
+.downloadCard p {
+  color: rgba(147, 197, 253, 0.7);
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.downloadButton {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: linear-gradient(135deg, #0062ff, #0052e0);
+  border: none;
+  border-radius: 0.5rem;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 98, 255, 0.3);
+}
+
+.downloadButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 98, 255, 0.4);
+}
+
+.downloadButtonSmall {
+  padding: 0.5rem 1rem;
+  background: linear-gradient(135deg, #0062ff, #0052e0);
+  border: none;
+  border-radius: 0.375rem;
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.downloadButtonSmall:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 98, 255, 0.3);
+}
+
+.successBanner {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  background: rgba(34, 197, 94, 0.15);
+  border: 1px solid rgba(34, 197, 94, 0.4);
+  color: #4ade80;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.pageInfo {
+  color: rgba(147, 197, 253, 0.8);
+  font-size: 0.95rem;
+}
+
+.pageControls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.pageNumbers {
+  display: flex;
+  gap: 0.25rem;
+  max-width: 420px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 0.25rem;
+}
+
+.pageButton {
+  min-width: 2.25rem;
+  height: 2.25rem;
+  padding: 0.25rem 0.5rem;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 0.375rem;
+  color: #93c5fd;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pageButton:hover {
+  background: rgba(59, 130, 246, 0.2);
+  border-color: rgba(59, 130, 246, 0.4);
+}
+
+.pageButtonActive {
+  background: rgba(59, 130, 246, 0.3);
+  border-color: rgba(59, 130, 246, 0.6);
+  color: white;
+}
+
+.pageNavButton {
+  padding: 0.5rem 0.75rem;
+  background: rgba(59, 130, 246, 0.18);
+  border: 1px solid rgba(59, 130, 246, 0.4);
+  border-radius: 0.375rem;
+  color: #93c5fd;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pageNavButton:hover:not(:disabled) {
+  background: rgba(59, 130, 246, 0.28);
+  color: white;
+}
+
+.pageNavButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.pageSizeWrap {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: 0.25rem;
+}
+
+.pageSizeLabel {
+  color: rgba(147, 197, 253, 0.75);
+  font-size: 0.85rem;
+}
+
+.pageSizeSelect {
+  padding: 0.4rem 0.5rem;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 0.375rem;
+  color: #93c5fd;
+  font-size: 0.9rem;
+}
+
+.pageIndicator {
+  color: rgba(255, 193, 7, 0.85);
+  font-weight: 600;
+}
+
+.rutasList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.rutaDownloadItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: rgba(15, 23, 42, 0.4);
+  border: 1px solid rgba(59, 130, 246, 0.1);
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.rutaDownloadItem:hover {
+  background: rgba(59, 130, 246, 0.1);
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+.rutaDownloadItem > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.rutaDownloadItem strong {
+  color: white;
+  font-size: 0.95rem;
+}
+
+.rutaInfo {
+  color: rgba(255, 193, 7, 0.75);
+  font-size: 0.8rem;
+}
+
+/* Modal */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+
+.modal {
+  background: linear-gradient(135deg, #1e293b, #334155);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  border-radius: 1rem;
+  max-width: 700px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.modalHeader h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: white;
+  margin: 0;
+}
+
+.closeButton {
+  background: transparent;
+  border: none;
+  color: rgba(147, 197, 253, 0.7);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  transition: all 0.2s ease;
+}
+
+.closeButton:hover {
+  background: rgba(239, 68, 68, 0.2);
+  color: #f87171;
+}
+
+.modalBody {
+  padding: 1.5rem;
+}
+
+.modalFooter {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  padding: 1.5rem;
+  border-top: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+/* Drag & Drop Zone */
+.dragDropZone {
+  border: 2px dashed rgba(59, 130, 246, 0.4);
+  border-radius: 0.75rem;
+  background: rgba(59, 130, 246, 0.08);
+  color: #93c5fd;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  min-height: 220px;
+  transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.dragDropZoneActive {
+  border-color: #ffc107;
+  background: rgba(59, 130, 246, 0.15);
+  box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.15);
+}
+
+.dragDropIcon {
+  width: 64px;
+  height: 64px;
+  color: #0062ff;
+}
+
+.dragDropText {
+  font-size: 1rem;
+  font-weight: 600;
+  color: rgba(147, 197, 253, 0.85);
+  text-align: center;
+}
+
+.dragDropLabel {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ffc107;
+  text-align: center;
+}
+
+.uploadStatus {
+  margin-top: 0.75rem;
+  color: #93c5fd;
+  text-align: center;
+}
+
+.fileName {
+  color: #facc15;
+  font-weight: 600;
+}
+
+.previewSection {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.previewItem {
+  background: rgba(15, 23, 42, 0.4);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+}
+
+.previewTitle {
+  color: white;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.previewRow {
+  color: #93c5fd;
+  font-size: 0.9rem;
+}
+
+.divider {
+  border-top: 1px solid rgba(59, 130, 246, 0.2);
+  margin: 1rem 0;
+}
+
+.dragDropLabel {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ffc107;
+  text-align: center;
+}
+
+.uploadStatus {
+  margin-top: 0.75rem;
+  color: #93c5fd;
+  text-align: center;
+}
+
+.fileName {
+  color: #facc15;
+  font-weight: 600;
+}
+
+.previewSection {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.previewItem {
+  background: rgba(15, 23, 42, 0.4);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+}
+
+.previewTitle {
+  color: white;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.previewRow {
+  color: #93c5fd;
+  font-size: 0.9rem;
+}
+
+/* Form */
+.formGroup {
+  margin-bottom: 1.25rem;
+}
+
+.formGroup label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: rgba(147, 197, 253, 0.9);
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.formGroup input[type="text"],
+.formGroup input[type="number"],
+.formGroup input[type="email"],
+.formGroup textarea {
+  width: 100%;
+  padding: 0.75rem;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 0.5rem;
+  color: #93c5fd;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+.formGroup input[type="text"]:focus,
+.formGroup input[type="number"]:focus,
+.formGroup input[type="email"]:focus,
+.formGroup textarea:focus {
+  outline: none;
+  border-color: #0062ff;
+  box-shadow: 0 0 0 3px rgba(0, 98, 255, 0.1);
+}
+
+.formGroup textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.formGroup input[type="checkbox"] {
+  margin-right: 0.5rem;
+  width: 1.25rem;
+  height: 1.25rem;
+  cursor: pointer;
+}
+
+.formGroup label:has(input[type="checkbox"]) {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.formToolbar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.switchInput {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.switchTrack {
+  width: 52px;
+  height: 28px;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  padding: 2px;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  transition: all 0.2s ease;
+}
+
+.switchTrackOn {
+  background: linear-gradient(135deg, #0062ff, #0052e0);
+  border-color: rgba(0, 98, 255, 0.6);
+  box-shadow: 0 0 0 3px rgba(0, 98, 255, 0.15);
+}
+
+.switchTrackOff {
+  background: rgba(15, 23, 42, 0.9);
+}
+
+.switchThumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 9999px;
+  background: #93c5fd;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.switchThumbOn {
+  transform: translateX(24px);
+  background: #ffe600;
+}
+
+.switchLabel {
+  color: rgba(147, 197, 253, 0.9);
+  font-weight: 600;
+}
+
+/* Horarios */
+.horariosContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.horarioItem {
+  background: rgba(15, 23, 42, 0.4);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.horarioHeader {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.horarioDiaInput {
+  flex: 1;
+  padding: 0.5rem;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 0.375rem;
+  color: #93c5fd;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.horarioDiaInput:focus {
+  outline: none;
+  border-color: #0062ff;
+  box-shadow: 0 0 0 2px rgba(0, 98, 255, 0.1);
+}
+
+.removeHorarioButton {
+  padding: 0.5rem 0.75rem;
+  background: rgba(239, 68, 68, 0.2);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 0.375rem;
+  color: #f87171;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.removeHorarioButton:hover {
+  background: rgba(239, 68, 68, 0.3);
+  border-color: rgba(239, 68, 68, 0.5);
+  transform: scale(1.05);
+}
+
+.salidasContainer {
+  width: 100%;
+}
+
+.salidasInput {
+  width: 100%;
+  padding: 0.5rem;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 0.375rem;
+  color: #93c5fd;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.salidasInput:focus {
+  outline: none;
+  border-color: #0062ff;
+  box-shadow: 0 0 0 2px rgba(0, 98, 255, 0.1);
+}
+
+.salidasInput::placeholder {
+  color: rgba(147, 197, 253, 0.5);
+}
+
+.addHorarioButton {
+  padding: 0.75rem 1rem;
+  background: rgba(59, 130, 246, 0.2);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  border-radius: 0.5rem;
+  color: #93c5fd;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
+.addHorarioButton:hover {
+  background: rgba(59, 130, 246, 0.3);
+  border-color: rgba(59, 130, 246, 0.5);
+  color: white;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+    padding: 0.5rem;
+    padding-top: 5rem;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .tabs {
+    flex-wrap: nowrap;
+  }
+
+  .tab {
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .section {
+    padding: 1rem;
+  }
+
+  .sectionHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .tableContainer {
+    overflow-x: scroll;
+  }
+
+  .table {
+    font-size: 0.875rem;
+  }
+
+  .table th,
+  .table td {
+    padding: 0.75rem 0.5rem;
+  }
+
+  .formRow {
+    grid-template-columns: 1fr;
+  }
+
+  .formToolbar {
+    justify-content: flex-start;
+  }
+
+  .pagination {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+
+  .pageControls {
+    justify-content: space-between;
+  }
+
+  .pageNumbers {
+    display: none;
+  }
+
+  .pageNavButton {
+    flex: 1;
+  }
+
+  .pageSizeWrap {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .downloadSection {
+    grid-template-columns: 1fr;
+  }
+
+  .modal {
+    max-width: 100%;
+    margin: 1rem;
+  }
+
+  .rutaDownloadItem {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .downloadButtonSmall {
+    width: 100%;
+  }
+}
+
+.select {
+  width: 100%;
+  padding: 0.75rem;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 0.5rem;
+  color: #93c5fd;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.select:focus {
+  outline: none;
+  border-color: #0062ff;
+  box-shadow: 0 0 0 3px rgba(0, 98, 255, 0.1);
+}
+
+.select option {
+  background: #0f172a;
+  color: #93c5fd;
+}
+
+.mapContainer {
+  margin: 1rem 0 1.5rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.mapToolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.stepBadge {
+  padding: 0.5rem 0.75rem;
+  background: rgba(255, 193, 7, 0.12);
+  border: 1px solid rgba(255, 193, 7, 0.4);
+  color: #ffe600;
+  border-radius: 0.5rem;
+  font-weight: 600;
+}
+
+.mapSearchWrap {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.mapSearchInput {
+  width: 280px;
+  max-width: 60vw;
+  padding: 0.55rem 0.75rem;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 0.5rem;
+  color: #93c5fd;
+}
+
+.searchButton {
+  padding: 0.55rem 0.9rem;
+  background: rgba(59, 130, 246, 0.18);
+  border: 1px solid rgba(59, 130, 246, 0.5);
+  border-radius: 0.5rem;
+  color: #93c5fd;
+  cursor: pointer;
+}
+
+.stepButtons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.mapEmbed {
+  width: 100%;
+  min-height: 320px;
+  height: 36vh;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+@media (max-width: 768px) {
+  .mapSearchInput {
+    width: 180px;
+  }
+}
+

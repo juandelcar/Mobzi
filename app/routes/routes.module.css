@@ -1,0 +1,900 @@
+/* @frontend/ Página Mis Rutas */
+
+.page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1e293b, #334155);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+/* @frontend/ Header */
+.header {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: rgba(147, 197, 253, 0.8);
+  font-weight: 400;
+}
+
+/* @frontend/ Barra de búsqueda y filtros */
+.searchSection {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.searchBar {
+  position: relative;
+  flex: 1;
+  min-width: 250px;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1.25rem;
+  height: 1.25rem;
+  color: #93c5fd;
+  pointer-events: none;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 0.875rem 1rem 0.875rem 2.75rem;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 0.5rem;
+  color: #93c5fd;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.searchInput::placeholder {
+  color: rgba(147, 197, 253, 0.5);
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: #0062ff;
+  box-shadow: 0 0 0 3px rgba(0, 98, 255, 0.1);
+}
+
+.filterButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.25rem;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 0.5rem;
+  color: #93c5fd;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.filterButton svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.filterButton:hover {
+  background: rgba(30, 64, 175, 0.2);
+  border-color: rgba(59, 130, 246, 0.4);
+  transform: translateY(-1px);
+}
+
+.filterButtonActive {
+  background: rgba(255, 193, 7, 0.2);
+  border-color: #ffc107;
+  color: #ffc107;
+}
+
+.filterButtonActive:hover {
+  background: rgba(255, 193, 7, 0.3);
+  border-color: #ffb300;
+  color: #ffb300;
+}
+
+.filterButtonActive svg {
+  fill: #ffc107;
+  stroke: #ffc107;
+}
+
+/* @frontend/ Estado de carga */
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 1rem;
+  color: #93c5fd;
+  gap: 1rem;
+}
+
+.spinner {
+  width: 3rem;
+  height: 3rem;
+  border: 3px solid rgba(59, 130, 246, 0.2);
+  border-top-color: #0062ff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* @frontend/ Estado vacío */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 1rem;
+  text-align: center;
+  color: #93c5fd;
+}
+
+.emptyIcon {
+  width: 5rem;
+  height: 5rem;
+  margin-bottom: 1.5rem;
+  opacity: 0.5;
+}
+
+.emptyState h2 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: white;
+}
+
+.emptyState p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  color: rgba(147, 197, 253, 0.7);
+  max-width: 500px;
+}
+
+.primaryButton {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.875rem 2rem;
+  background: #0062ff;
+  border: none;
+  border-radius: 0.5rem;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.primaryButton:hover {
+  background: #0052e0;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 98, 255, 0.3);
+}
+
+/* @frontend/ Grid de rutas */
+.routesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+/* @frontend/ Tarjeta de ruta */
+.routeCard {
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.routeCard:hover {
+  border-color: rgba(59, 130, 246, 0.4);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.routeCardFavorita {
+  border-color: rgba(255, 193, 7, 0.4);
+  background: rgba(15, 23, 42, 0.95);
+}
+
+.routeCardFavorita:hover {
+  border-color: rgba(255, 193, 7, 0.6);
+  box-shadow: 0 8px 24px rgba(255, 193, 7, 0.2);
+}
+
+.routeCardHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.routeCardTitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.routeCardTitle h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: white;
+  margin: 0;
+  flex: 1;
+}
+
+.routeCardDate {
+  font-size: 0.875rem;
+  color: rgba(147, 197, 253, 0.6);
+  overflow: hidden;
+  position: relative;
+}
+
+/* @frontend/ Scroll automático para fecha en pantallas grandes */
+@media (min-width: 769px) {
+  .routeCardHeader {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .routeCardDate {
+    display: inline-block;
+    white-space: nowrap;
+    position: relative;
+    overflow: visible;
+    text-overflow: unset;
+    padding-right: 1rem;
+    will-change: transform;
+  }
+
+  /* Animación solo cuando el texto es más largo que el contenedor */
+  .routeCardDate.scrolling {
+    animation: scrollDateText 16s linear infinite;
+  }
+
+  .routeCardHeader:hover .routeCardDate {
+    animation-play-state: paused;
+  }
+
+  @keyframes scrollDateText {
+    0%,
+    25% {
+      transform: translateX(0);
+    }
+    35%,
+    65% {
+      transform: translateX(var(--scroll-offset, 0));
+    }
+    75%,
+    100% {
+      transform: translateX(0);
+    }
+  }
+}
+
+.favoriteButton {
+  background: transparent;
+  border: none;
+  color: rgba(147, 197, 253, 0.5);
+  cursor: pointer;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  border-radius: 0.25rem;
+  flex-shrink: 0;
+}
+
+.favoriteButton svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.favoriteButton:hover {
+  color: rgba(255, 193, 7, 0.8);
+  transform: scale(1.1);
+}
+
+.favoriteButtonActive {
+  color: #ffc107;
+}
+
+.favoriteButtonActive:hover {
+  color: #ffb300;
+}
+
+/* @frontend/ Cuerpo de la tarjeta */
+.routeCardBody {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.routeInfo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: rgba(0, 98, 255, 0.05);
+  border-radius: 0.5rem;
+  border: 1px solid rgba(59, 130, 246, 0.1);
+}
+
+.routeInfoItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+.routeInfoItem svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: #0062ff;
+  flex-shrink: 0;
+}
+
+.routeInfoItem div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.routeInfoLabel {
+  font-size: 0.75rem;
+  color: rgba(147, 197, 253, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.routeInfoValue {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: white;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+  position: relative;
+  overflow: visible;
+  text-overflow: unset;
+  padding-right: 1rem;
+  will-change: transform;
+}
+
+.routeInfoItem div {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.routeInfoValue {
+  display: inline-block;
+  white-space: nowrap;
+  position: relative;
+  overflow: visible;
+  text-overflow: unset;
+  padding-right: 2rem;
+  will-change: transform;
+}
+
+/* Animación solo cuando el texto es más largo que el contenedor */
+.routeInfoValue.scrolling {
+  animation: scrollTextHorizontal 18s linear infinite;
+}
+
+.routeInfoItem:hover .routeInfoValue {
+  animation-play-state: paused;
+}
+
+@keyframes scrollTextHorizontal {
+  0%,
+  25% {
+    transform: translateX(0);
+  }
+  35%,
+  65% {
+    transform: translateX(var(--scroll-offset, 0));
+  }
+  75%,
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.routeArrow {
+  font-size: 1.5rem;
+  color: #0062ff;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.routeDetails {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.routeDetailItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.routeDetailLabel {
+  font-size: 0.75rem;
+  color: rgba(147, 197, 253, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.routeDetailValue {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #93c5fd;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
+}
+
+/* @frontend/ Scroll automático para detalles en pantallas grandes */
+.routeDetailItem {
+  overflow: hidden;
+  position: relative;
+}
+
+.routeDetailValue {
+  display: inline-block;
+  white-space: nowrap;
+  position: relative;
+  overflow: visible;
+  text-overflow: unset;
+  padding-right: 1rem;
+  will-change: transform;
+}
+
+/* Animación solo cuando el texto es más largo que el contenedor */
+.routeDetailValue.scrolling {
+  animation: scrollDetailTextHorizontal 18s linear infinite;
+}
+
+.routeDetailItem:hover .routeDetailValue {
+  animation-play-state: paused;
+}
+
+@keyframes scrollDetailTextHorizontal {
+  0%,
+  25% {
+    transform: translateX(0);
+  } 
+  35%,
+  65% {
+    transform: translateX(var(--scroll-offset, 0));
+  }
+  75%,
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* @frontend/ Acciones de la tarjeta */
+.routeCardActions {
+  display: flex;
+  gap: 0.75rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(59, 130, 246, 0.1);
+}
+
+/* .secondaryButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  background: rgba(0, 98, 255, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  border-radius: 0.5rem;
+  color: #93c5fd;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.secondaryButton:hover {
+  background: rgba(0, 98, 255, 0.2);
+  border-color: #0062ff;
+  transform: translateY(-2px);
+}
+
+ @frontend/ Extra section (Horarios y Paradas) 
+.extraSection {
+  margin-top: 0.75rem;
+  background: rgba(0, 98, 255, 0.05);
+  border: 1px solid rgba(59, 130, 246, 0.15);
+  border-radius: 0.5rem;
+}
+
+.extraHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 0.75rem 0.25rem;
+  gap: 0.5rem;
+}
+
+.extraTabs {
+  display: inline-flex;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.extraTab {
+  padding: 0.5rem 0.9rem;
+  color: #93c5fd;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.15s ease;
+}
+
+.extraTab:hover {
+  background: rgba(30, 64, 175, 0.2);
+}
+
+.extraTabActive {
+  background: rgba(0, 98, 255, 0.25);
+  color: white;
+}
+
+.extraActions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.extraBody {
+  padding: 0.75rem;
+  border-top: 1px solid rgba(59, 130, 246, 0.15);
+}
+
+.scheduleTableWrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.scheduleTable {
+  width: 100%;
+  border-collapse: collapse;
+  color: #93c5fd;
+}
+
+.scheduleTable th,
+.scheduleTable td {
+  text-align: left;
+  padding: 0.6rem 0.5rem;
+  border-bottom: 1px solid rgba(59, 130, 246, 0.15);
+}
+
+.scheduleTable th {
+  color: white;
+  font-weight: 600;
+}
+
+.scheduleTimes {
+  white-space: nowrap;
+}
+
+.stopsList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0;
+  margin: 0;
+}
+
+.stopItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.6rem;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(59, 130, 246, 0.15);
+  border-radius: 0.5rem;
+}
+
+.stopIndex {
+  width: 1.5rem;
+  height: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: rgba(0, 98, 255, 0.2);
+  color: white;
+  font-size: 0.8rem;
+  flex-shrink: 0;
+}
+
+.stopName {
+  color: #93c5fd;
+  font-weight: 500;
+}
+
+.emptyCell {
+  padding: 0.75rem;
+  color: rgba(147, 197, 253, 0.7);
+  text-align: center;
+} */
+
+.actionButton {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: rgba(0, 98, 255, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  border-radius: 0.5rem;
+  color: #93c5fd;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.actionButton svg {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+.actionButton:hover {
+  background: rgba(0, 98, 255, 0.2);
+  border-color: #0062ff;
+  transform: translateY(-2px);
+}
+
+.actionButtonDanger {
+  background: rgba(220, 38, 38, 0.1);
+  border-color: rgba(220, 38, 38, 0.3);
+  color: rgba(248, 113, 113, 1);
+}
+
+.actionButtonDanger:hover {
+  background: rgba(220, 38, 38, 0.2);
+  border-color: rgba(220, 38, 38, 0.5);
+  color: rgba(248, 113, 113, 1);
+}
+
+/* @frontend/ Media queries para responsive */
+@media (max-width: 768px) {
+  /* Animación solo cuando el texto es más largo que el contenedor */
+  .routeInfoValue.scrolling {
+    animation: scrollTextHorizontal 18s linear infinite;
+  }
+
+  .routeInfoItem:hover .routeInfoValue {
+    animation-play-state: paused;
+  }
+
+  @keyframes scrollTextHorizontal {
+    0%,
+    25% {
+      transform: translateX(0);
+    }
+    35%,
+    65% {
+      transform: translateX(var(--scroll-offset, 0));
+    }
+    75%,
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  .routeDetailItem {
+    overflow: hidden;
+    position: relative;
+  }
+
+  .routeDetailValue {
+    display: inline-block;
+    white-space: nowrap;
+    position: relative;
+    overflow: visible;
+    text-overflow: unset;
+    padding-right: 1rem;
+    will-change: transform;
+  }
+
+  /* Animación solo cuando el texto es más largo que el contenedor */
+  .routeDetailValue.scrolling {
+    animation: scrollDetailTextHorizontal 18s linear infinite;
+  }
+
+  .routeDetailItem:hover .routeDetailValue {
+    animation-play-state: paused;
+  }
+
+  @keyframes scrollDetailTextHorizontal {
+    0%,
+    25% {
+      transform: translateX(0);
+    }
+    35%,
+    65% {
+      transform: translateX(var(--scroll-offset, 0));
+    }
+    75%,
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .searchSection {
+    flex-direction: column;
+  }
+
+  .searchBar {
+    min-width: 100%;
+  }
+
+  .routesGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .routeInfo {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .routeArrow {
+    transform: rotate(90deg);
+    align-self: center;
+  }
+
+  .routeDetails {
+    grid-template-columns: 1fr;
+  }
+
+  .routeCardActions {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Animación solo cuando el texto es más largo que el contenedor */
+  .routeInfoValue.scrolling {
+    animation: scrollTextHorizontal 18s linear infinite;
+  }
+
+  .routeInfoItem:hover .routeInfoValue {
+    animation-play-state: paused;
+  }
+
+  @keyframes scrollTextHorizontal {
+    0%,
+    25% {
+      transform: translateX(0);
+    }
+    35%,
+    65% {
+      transform: translateX(var(--scroll-offset, 0));
+    }
+    75%,
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  .routeDetailItem {
+    overflow: hidden;
+    position: relative;
+  }
+
+  .routeDetailValue {
+    display: inline-block;
+    white-space: nowrap;
+    position: relative;
+    overflow: visible;
+    text-overflow: unset;
+    padding-right: 1rem;
+    will-change: transform;
+  }
+
+  /* Animación solo cuando el texto es más largo que el contenedor */
+  .routeDetailValue.scrolling {
+    animation: scrollDetailTextHorizontal 18s linear infinite;
+  }
+
+  .routeDetailItem:hover .routeDetailValue {
+    animation-play-state: paused;
+  }
+
+  @keyframes scrollDetailTextHorizontal {
+    0%,
+    25% {
+      transform: translateX(0);
+    }
+    35%,
+    65% {
+      transform: translateX(var(--scroll-offset, 0));
+    }
+    75%,
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  .container {
+    padding: 0.75rem;
+  }
+
+  .header {
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .title {
+    font-size: 1.75rem;
+  }
+
+  .routeCard {
+    padding: 1.25rem;
+  }
+}
