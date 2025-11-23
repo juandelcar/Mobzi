@@ -191,10 +191,24 @@ export const apiRequest = async <T = unknown>(
   }
   
   // Construir URL final, asegurando que no haya dobles barras
-  let url = `${baseURL}${endpoint}`;
+  // Limpiar baseURL: quitar todas las barras al final
+  let cleanBaseURL = baseURL.trim();
+  while (cleanBaseURL.endsWith('/')) {
+    cleanBaseURL = cleanBaseURL.slice(0, -1);
+  }
   
-  // Corregir dobles barras (//) excepto después de https://
-  url = url.replace(/([^:]\/)\/+/g, '$1');
+  // Limpiar endpoint: asegurar que empiece con /
+  let cleanEndpoint = endpoint.trim();
+  if (!cleanEndpoint.startsWith('/')) {
+    cleanEndpoint = `/${cleanEndpoint}`;
+  }
+  
+  // Construir URL
+  let url = `${cleanBaseURL}${cleanEndpoint}`;
+  
+  // Corregir dobles barras (//) excepto después de https:// o http://
+  // Reemplazar cualquier secuencia de 2+ barras con una sola barra, excepto después de :
+  url = url.replace(/([^:])\/\/+/g, '$1/');
   
   // CORRECCIÓN FINAL OBLIGATORIA: Si la URL contiene :3001 y es ngrok, ELIMINAR el puerto
   // Esta es una verificación de seguridad adicional que SIEMPRE se ejecuta
