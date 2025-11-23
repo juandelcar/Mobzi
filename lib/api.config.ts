@@ -14,7 +14,20 @@ export const getBaseURL = (): string => {
 
   // PRIORIDAD 2: Variable de entorno (útil para producción con ngrok o URLs personalizadas)
   if (process.env.NEXT_PUBLIC_API_URL) {
-    return process.env.NEXT_PUBLIC_API_URL;
+    // Limpiar la URL: quitar barras al final y asegurar que tenga /api/v1
+    let envUrl = process.env.NEXT_PUBLIC_API_URL.trim();
+    
+    // Si termina con /, quitarlo
+    if (envUrl.endsWith('/')) {
+      envUrl = envUrl.slice(0, -1);
+    }
+    
+    // Si no termina con /api/v1, agregarlo
+    if (!envUrl.endsWith('/api/v1')) {
+      envUrl = `${envUrl}/api/v1`;
+    }
+    
+    return envUrl;
   }
 
   // PRIORIDAD 3: Variable de entorno alternativa

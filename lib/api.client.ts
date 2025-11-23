@@ -71,8 +71,21 @@ export const apiRequest = async <T = unknown>(
     console.log('🔗 [apiRequest] Using BACKEND_URL from localStorage:', baseURL);
   } else if (process.env.NEXT_PUBLIC_API_URL) {
     // Prioridad 2: Variable de entorno (más confiable)
-    baseURL = process.env.NEXT_PUBLIC_API_URL;
-    console.log('🔗 [apiRequest] Using NEXT_PUBLIC_API_URL:', baseURL);
+    // Limpiar la URL: quitar barras al final y asegurar que tenga /api/v1
+    let envUrl = process.env.NEXT_PUBLIC_API_URL.trim();
+    
+    // Si termina con /, quitarlo
+    if (envUrl.endsWith('/')) {
+      envUrl = envUrl.slice(0, -1);
+    }
+    
+    // Si no termina con /api/v1, agregarlo
+    if (!envUrl.endsWith('/api/v1')) {
+      envUrl = `${envUrl}/api/v1`;
+    }
+    
+    baseURL = envUrl;
+    console.log('🔗 [apiRequest] Using NEXT_PUBLIC_API_URL (cleaned):', baseURL);
   } else if (typeof window !== 'undefined' && window.location) {
     const hostname = window.location.hostname;
     const protocol = window.location.protocol;
@@ -177,7 +190,11 @@ export const apiRequest = async <T = unknown>(
     }
   }
   
+  // Construir URL final, asegurando que no haya dobles barras
   let url = `${baseURL}${endpoint}`;
+  
+  // Corregir dobles barras (//) excepto después de https://
+  url = url.replace(/([^:]\/)\/+/g, '$1');
   
   // CORRECCIÓN FINAL OBLIGATORIA: Si la URL contiene :3001 y es ngrok, ELIMINAR el puerto
   // Esta es una verificación de seguridad adicional que SIEMPRE se ejecuta
