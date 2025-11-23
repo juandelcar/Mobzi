@@ -28,6 +28,15 @@ self.addEventListener('fetch', (event) => {
 
   const url = new URL(req.url);
 
+  // Ignorar esquemas no soportados (chrome-extension, data, blob, etc.)
+  if (url.protocol === 'chrome-extension:' || 
+      url.protocol === 'chrome:' ||
+      url.protocol === 'data:' ||
+      url.protocol === 'blob:') {
+    // No intentar cachear estos recursos
+    return;
+  }
+
   // App shell y estáticos: cache-first, luego red
   if (url.origin === self.location.origin) {
     event.respondWith(
@@ -35,9 +44,22 @@ self.addEventListener('fetch', (event) => {
         (cached) =>
           cached ||
           fetch(req).then((res) => {
-            const clone = res.clone();
-            caches.open(STATIC_CACHE).then((c) => c.put(req, clone));
+            // Solo cachear si la respuesta es exitosa
+            if (res.ok) {
+              const clone = res.clone();
+              caches.open(STATIC_CACHE).then((c) => {
+                try {
+                  c.put(req, clone);
+                } catch (error) {
+                  // Ignorar errores de cache (puede fallar con algunos recursos)
+                  console.warn('Service Worker: Error al cachear recurso:', req.url);
+                }
+              });
+            }
             return res;
+          }).catch((error) => {
+            // Si falla el fetch, intentar devolver del cache
+            return caches.match(req);
           })
       )
     );
@@ -48,8 +70,18 @@ self.addEventListener('fetch', (event) => {
   event.respondWith(
     fetch(req)
       .then((res) => {
-        const clone = res.clone();
-        caches.open('mobzi-api-v1').then((c) => c.put(req, clone));
+        // Solo cachear si la respuesta es exitosa
+        if (res.ok) {
+          const clone = res.clone();
+          caches.open('mobzi-api-v1').then((c) => {
+            try {
+              c.put(req, clone);
+            } catch (error) {
+              // Ignorar errores de cache
+              console.warn('Service Worker: Error al cachear API:', req.url);
+            }
+          });
+        }
         return res;
       })
       .catch(() => caches.match(req))
