@@ -58,15 +58,32 @@ export default function BackendConfigDialog({
 
       // Probar el endpoint /health directamente (está en la raíz del backend, no en /api/v1)
       const healthUrl = `${testUrl}/health`;
+      
+      // Headers para evitar la página de advertencia de ngrok
+      const headers: HeadersInit = {
+        'Content-Type': 'application/json',
+        'ngrok-skip-browser-warning': 'true',
+        'Accept': 'application/json',
+      };
+      
       const healthResponse = await fetch(healthUrl, {
         method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers,
       });
 
       if (!healthResponse.ok) {
         throw new Error(`HTTP ${healthResponse.status}: ${healthResponse.statusText}`);
+      }
+
+      // Verificar que la respuesta sea JSON, no HTML (página de advertencia de ngrok)
+      const contentType = healthResponse.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+        // Intentar leer como texto para ver qué devolvió
+        const text = await healthResponse.text();
+        if (text.includes('<!DOCTYPE') || text.includes('<html')) {
+          throw new Error('Ngrok está mostrando su página de advertencia. Por favor, visita la URL en el navegador primero para aceptar la advertencia, luego intenta de nuevo.');
+        }
+        throw new Error(`El servidor devolvió ${contentType} en lugar de JSON. Verifica que la URL sea correcta.`);
       }
 
       const healthData = await healthResponse.json();

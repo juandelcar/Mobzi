@@ -253,6 +253,8 @@ export const apiRequest = async <T = unknown>(
   // Headers por defecto
   const headers: Record<string, string> = {
     'Content-Type': 'application/json',
+    'Accept': 'application/json',
+    'ngrok-skip-browser-warning': 'true', // Evitar página de advertencia de ngrok
     ...(fetchOptions.headers as Record<string, string>),
   };
 
